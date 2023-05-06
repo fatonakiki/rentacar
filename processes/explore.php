@@ -34,7 +34,7 @@ if($result = mysqli_query($link, $sql)) {
             carRender($id, $name, $year, $image_url, $price, $type, $engine, $transmission, $location);
         }
     } else {
-        echo "No records matching your query were found.";
+        echo "No cars are available at that location and the dates you selected.";
     }
 } else {
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
