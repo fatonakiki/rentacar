@@ -41,6 +41,7 @@ function validateForm() {
   var password = document.getElementById("password").value;
   var confirmPassword = document.getElementById("confirmPassword").value;
 
+  // checking if passwords don't match, if they don't they are not allowed to go further
   if (password !== confirmPassword) {
     alert("Passwords do not match!");
     return false;
@@ -56,9 +57,9 @@ function showDialogForInsert() {
 }
 
 function showDialogForDelete(id) {
-  deleteCar.showModal();
+  deleteCar.showModal(); //show dialog
   var textId = document.querySelector('input[name="idToDelete"]');
-  textId.value = id;
+  textId.value = id; //assign id to the field
 }
 
 function showDialogForEdit(id) {
@@ -89,6 +90,7 @@ function showDialogForEdit(id) {
 
 //make a booking
 function addToBookings(id, price) {
+  //if user isn't logged in or didn't fill all fields in search
   if (typeof bookData === 'undefined' || bookData === null) {
     alert("Please login (if you haven't so) and perform a search by filling all fields first!");
     return;

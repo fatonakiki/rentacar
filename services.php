@@ -14,7 +14,6 @@
   <!-- ===== CSS ===== -->
   <link rel="stylesheet" href="./assets/css/style.css">
 
-  <!--<title> Login & Registration Form </title> -->
 </head>
 
 <?php
