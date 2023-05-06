@@ -30,7 +30,7 @@
           </li>
 
           <li>
-            <a href="aboutus.php" class="footer-link">About us</a>
+            <a href="about.php" class="footer-link">About us</a>
           </li>
 
           <li>

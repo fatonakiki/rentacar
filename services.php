@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="./assets/css/style.css">
 
 <!DOCTYPE html>
-<!-- === Coding by CodingLab | www.codinglabweb.com === -->
 <html lang="en">
 
 <head>
