@@ -48,8 +48,18 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
             
         } else {
             // Invalid password
-            echo "Invalid password!";
+            echo '<script type="text/javascript">'; 
+            echo 'alert("Invalid Password!");'; 
+            echo 'window.location.href = "../register.php";';
+            echo '</script>';
         }
+    }
+    else {
+        // User doesn't exist
+        echo '<script type="text/javascript">'; 
+        echo 'alert("User does not exist!");'; 
+        echo 'window.location.href = "../register.php";';
+        echo '</script>';
     }
 }
 
