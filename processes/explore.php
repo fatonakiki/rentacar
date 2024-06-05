@@ -8,9 +8,7 @@ if($link === false) {
 }
 // Retrieving cars that are available at that location and between the selected dates by the user
 if (isset($location) && isset($start_date) && isset($end_date)) {
-  $sql = "SELECT v.* FROM vehicles v
-  LEFT JOIN bookings b ON v.vehicle_id = b.vehicle_id
-  WHERE v.location = '$location' AND (b.booking_id IS NULL OR b.end_date < '$start_date' OR b.start_date > '$end_date')";
+  $sql = "SELECT v.* FROM vehicles v WHERE v.location = '$location' AND v.vehicle_id NOT IN ( SELECT b.vehicle_id FROM bookings b WHERE '$start_date' < b.end_date AND '$end_date' > b.start_date );";
 }
 // if user didn't fill the search fields, retrieve all the cars
 else {
