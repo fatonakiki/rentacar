@@ -94,15 +94,15 @@
     <?php
     // only going through if location, type, brand, model, engine, transmission, year and price are submitted
     if (isset($_POST["location"]) && isset($_POST["type"]) && isset($_POST["brand"]) && isset($_POST["model"]) && isset($_POST["engine"]) && isset($_POST["transmission"]) && isset($_POST["year"]) && isset($_POST["price"])) {
-        $location=$_POST["location"];
-        $id=$_POST["id"];
-        $type=$_POST["type"];
-        $brand=$_POST["brand"];
-        $model=$_POST["model"];
-        $engine=$_POST["engine"];
-        $transmission=$_POST["transmission"];
-        $year=$_POST["year"];
-        $price=$_POST["price"];
+        $location = $_POST["location"];
+        $id = $_POST["id"];
+        $type = $_POST["type"];
+        $brand = $_POST["brand"];
+        $model = $_POST["model"];
+        $engine = $_POST["engine"];
+        $transmission = $_POST["transmission"];
+        $year = $_POST["year"];
+        $price = $_POST["price"];
         $image = $_FILES['image'];
         $filename = $image['name'];
         $targetDir = 'uploads/';
@@ -113,6 +113,17 @@
         if($link === false) {
             die("ERROR: Could not connect. " . mysqli_connect_error());
         }
+        $file_type = $_FILES['image']['type']; //returns the mimetype
+
+        $allowed = array("image/jpeg", "image/gif", "image/png");
+        if(!in_array($file_type, $allowed)) {
+            $error_message = 'Only jpg, gif, and png files are allowed.';
+
+            echo "<meta http-equiv='refresh' content='0'><script>alert('$error_message')</script>";
+
+            exit();
+
+        }
         if (move_uploaded_file($image['tmp_name'], $targetDir . $filename)) {
             // Image uploaded successfully, save the URL in the database
             $imageUrl = $targetDir . $filename;
@@ -122,8 +133,7 @@
         if ($id > 0) {
             if ($imageUrl == '') {
                 $sql = "Update vehicles set location='$location', type='$type', brand='$brand', model='$model', engine='$engine', transmission='$transmission', year=$year, price_per_day=$price where vehicle_id=$id";
-            }
-            else {
+            } else {
 
                 $sql = "Update vehicles set location='$location', type='$type', brand='$brand', model='$model', engine='$engine', transmission='$transmission', year=$year, price_per_day=$price, image_url='$imageUrl' where vehicle_id=$id";
             }
@@ -132,11 +142,11 @@
         else {
             $sql = "INSERT INTO vehicles(location, type, brand, model, engine, transmission, year, price_per_day, image_url) VALUES ('$location', '$type', '$brand', '$model', '$engine', '$transmission', $year, $price, '$imageUrl')";
         }
-        
+
         // if query is executed successfully refresh the page
         if(mysqli_query($link, $sql)) {
             echo "<meta http-equiv='refresh' content='0'>";
-         //   echo "Records inserted successfully.";
+            //   echo "Records inserted successfully.";
         } else {
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
         }
